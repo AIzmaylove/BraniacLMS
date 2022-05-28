@@ -1,5 +1,11 @@
+import json
+
+from django.conf import settings
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from datetime import datetime
+
+from mainapp.models import News
 
 class ContactsView(TemplateView):
     template_name = 'mainapp/contacts.html'
@@ -48,28 +54,14 @@ class NewsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['object_list'] = [
-            {
-                'title': 'Новость раз',
-                'preview': 'Превью для новости раз',
-                'date': datetime.now()
-            },{
-                'title': 'Новость два',
-                'preview': 'Превью для новости два',
-                'date': datetime.now()
-            },{
-                'title': 'Новость три',
-                'preview': 'Превью для новости три',
-                'date': datetime.now()
-            },{
-                'title': 'Новость четыре',
-                'preview': 'Превью для новости четрые',
-                'date': datetime.now()
-            },{
-                'title': 'Новость пять',
-                'preview': 'Превью для новости пять',
-                'date': datetime.now()
-            }
-        ]
-        
+        # with open(settings.BASE_DIR / 'news.json') as news_file:
+        #     context_data['object_list'] = json.load(news_file)   
+        context_data['object_list'] = News.objects.all()
         return context_data
+
+    def get(self, *args, **kwargs):
+        query = self.request.GET.get('q', None)
+        if query:
+            return HttpResponseRedirect(f'https://google.ru/search?q={query}')
+
+        return super().get(*args, **kwargs)

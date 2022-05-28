@@ -1,0 +1,23 @@
+[
+    {
+        "title": "First new",
+        "preview": "Preview number 1",
+        "date": "2022-01-01 20:00"
+    },{
+        "title": "Second new",
+        "preview": "Preview number 2",
+        "date": "2022-01-02 20:00"
+    },{
+        "title": "Third new",
+        "preview": "Preview number 3",
+        "date": "2022-01-03 20:00"
+    },{
+        "title": "Новость четыре",
+        "preview": "Превью для новости четрые",
+        "date": "2022-01-04 20:00"
+    },{
+        "title": "Новость пять",
+        "preview": "Превью для новости пять",
+        "date": "2022-01-05 20:00"
+    }
+]
