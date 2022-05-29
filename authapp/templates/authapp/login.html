@@ -1,7 +1,8 @@
 {% extends 'authapp/base.html' %}
 {% block content %}
 
-<form>
+<form method="post">
+  {% csrf_token %}
   <p>
     <input id="id_username" class="form-control" type="text" name="username" placeholder="Имя пользователя" required=""
       autofocus="">
@@ -13,16 +14,14 @@
     <button type="submit" class="btn btn-primary btn-block">Войти</button>
   </p>
 </form>
-<p class="text-right">
-  <a href=""><small>Забыли пароль?</small></a>
-</p>
-<h4>Вход через социальные сети</h4>
-<p>
-<div class="btn-group btn-block" role="group">
-  <a class="btn btn-primary" href="#" role="button"><i class="fab fa-vk"></i></a>
-  <a class="btn btn-primary" href="#" role="button"><i class="fab fa-github"></i></a>
-  <a class="btn btn-primary" href="#" role="button"><i class="fab fa-facebook"></i></a>
+<div class="row justify-content-between">
+  <div class="col">
+      <a href="{% url 'authapp:register' %}"><small>Регистрация</small></a>
+  </div>
+  <div class="col">
+      <a href="#"><small>Забыли пароль?</small></a>
+  </div>
 </div>
-</p>
+<h4>Вход через социальные сети</h4>
 
 {% endblock %}
