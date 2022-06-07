@@ -28,12 +28,12 @@
                 <img src="{% static 'img/logo.png' %}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
 
-        {% include 'mainapp/includes/inc_main_menu.html' %}
+
+            {% include 'mainapp/includes/inc_main_menu.html' %}
         </div>
     </nav>
 
@@ -42,9 +42,9 @@
 
 
     <div class="container-md">
-    {% block content %}
-    {% endblock %}    
-    </div>        
+        {% block content %}
+        {% endblock %}
+    </div>
 
 
     <!-- Footer -->
@@ -124,7 +124,9 @@
 
     <!-- FontAwesome -->
     <script src="{% static 'js/fontawesome.all.min.js' %}"></script>
+    {% block js %}
 
+    {% endblock %}
 
 
 </body>

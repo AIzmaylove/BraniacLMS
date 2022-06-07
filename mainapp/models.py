@@ -3,7 +3,10 @@ from tabnanny import verbose
 from turtle import title, update
 from unicodedata import name
 from venv import create
+from django.conf import settings
 from django.db import models
+from django.contrib.auth import get_user_model
+
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -32,7 +35,7 @@ class NewsManager(models.Manager):
 
 
 class News(BaseModel):
-    objects = NewsManager()
+    # objects = NewsManager()
 
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     intro = models.CharField(max_length=1000, verbose_name='Вступление')
@@ -58,7 +61,7 @@ class Course(BaseModel):
     cover = models.CharField(max_length=25, default="no_img.svg", verbose_name="Cover")
     
     def __str__(self):
-        return f'#{self.pk} {self.title}'
+        return f'#{self.pk} {self.name}'
     
     class Meta:
         verbose_name = 'курс'
@@ -88,3 +91,30 @@ class CoursesTeachers(BaseModel):
     def __str__(self) -> str:
         return "{0:0>3} {1} {2}".format(self.pk, self.name_second, self.name_first)
 
+
+    class Meta:
+        verbose_name = 'преподаватель курса'
+        verbose_name_plural = 'преподаватели'
+
+
+class CourseFeedback(BaseModel):
+    
+    RATINGS = (
+        (5, '⭐⭐⭐⭐⭐'),
+        (4, '⭐⭐⭐⭐'),
+        (3, '⭐⭐⭐'),
+        (2, '⭐⭐'),
+        (1, '⭐'),
+    )
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь')
+    rating = models.SmallIntegerField(choices=RATINGS, default=5, verbose_name='Рейтинг')
+    feedback = models.TextField(verbose_name='Отзыв', default='Без отзыва')
+
+    class Meta:
+        verbose_name = ''
+        verbose_name_plural = ''
+
+    def __str__(self):
+        return f'Отзыв на {self.course} от {self.user}'
