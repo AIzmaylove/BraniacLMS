@@ -8,6 +8,14 @@
   <div class="container">
     <h1 class="display-4">Наши контакты</h1>
     <p class="lead">Обязательно свяжитесь с нами! Ваш комфорт - наша забота.</p>
+    <div class="row">
+      <form method="post" class="form_group">
+        {% csrf_token %}
+        <textarea class="form_control col-12" name="massage_body"></textarea>
+        <input type="submit" class="btn btn-primary" value="Отправить"/>
+
+      </form>
+    </div>
   </div>
 </div>
 </p>
@@ -29,7 +37,7 @@
         </ul>
         <ul class="list-unstyled">
           <li>Email</li>
-          <li><strong>{{ contact.email|email_to_link }}</strong></li> 
+          <li><strong>{{ contact.email|email_to_link }}</strong></li>
         </ul>
         <ul class="list-unstyled">
           <li>Адрес</li>
