@@ -72,7 +72,7 @@ class LoginView(TemplateView):
     
 class NewsListView(ListView):
     model = News
-    paginate_by = 5
+    paginate_by = 2
 
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
@@ -84,7 +84,7 @@ class NewsCreateView(PermissionRequiredMixin, CreateView):
     model = News
     fields = '__all__'
     success_url = reverse_lazy('mainapp:news')
-    permmission_required = ('mainapp.add_news',)
+    permmission_required = ('mainapp.add_news', )
 
 
 class NewsUpdateView(PermissionRequiredMixin, UpdateView):
@@ -135,6 +135,10 @@ class CourseDetailView(TemplateView):
         
         if self.request.user.is_authenticated:
             context_data['feedback_form'] = CourseFeedbackForm(course=context_data['course_object'], user=self.request.user)
+        
+        from django.core.paginator import Paginator
+        paginator = Paginator(context_data['feedback_list'], 2)
+        
         return context_data
 
 

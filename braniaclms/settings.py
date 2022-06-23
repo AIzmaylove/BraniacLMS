@@ -234,3 +234,5 @@ LOGGING = {
 #         "django": {"level": "INFO", "handlers": ["console"]},
 #         },
 # }
+
+LOCALE_PATH = [BASE_DIR / 'locale']
